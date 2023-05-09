@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
 {
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour
         void LookAtTarget()
         {
             Vector3 directionToTarget = (Target.position - transform.position).normalized;
-            directionToTarget.y = 0; // Убираем вертикальную составляющую, чтобы игрок не "смотрел" вверх или вниз
+            directionToTarget.y = 0; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
             rb.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.fixedDeltaTime);
         }

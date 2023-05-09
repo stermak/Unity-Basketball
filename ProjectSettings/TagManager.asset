@@ -9,6 +9,7 @@ TagManager:
   - Player1
   - Player2
   - Ground
+  - Referee
   layers:
   - Default
   - TransparentFX
