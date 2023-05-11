@@ -1,7 +1,6 @@
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
-using Photon.Pun;
 
 public class MainMenu : MonoBehaviourPunCallbacks
 {

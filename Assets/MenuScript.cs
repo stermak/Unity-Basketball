@@ -9,11 +9,6 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip audioClip;
 
-    //private void Awake()
-    //{
-    //    DontDestroyOnLoad(gameObject);
-    //}
-
     public void Start()
     {
         audioSource.clip = audioClip;

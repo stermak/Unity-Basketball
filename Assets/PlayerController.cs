@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
@@ -15,13 +14,16 @@ public class PlayerController : MonoBehaviour
     public float minZ = -0f;
     public float maxZ = 0f;
     public bool IsBallInHands { get; private set; } = false;
-    public Transform Ball;
+    public GameObject BallPrefab;
     public Transform PosDribble;
     public Transform PosOverHead;
     public Transform Arms;
     public Transform Target;
 
+    private PhotonView photonView;
     private Rigidbody rb;
+    private GameObject ballParent;
+    private GameObject tempBall;
     private bool IsBallFlying = false;
     private float T = 0;
     private float holdTimer = 0f;
@@ -36,12 +38,28 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        photonView = GetComponent<PhotonView>();
+        if (photonView.IsMine)
+        {
+            ballParent = new GameObject("BallParent");
+            ballParent.transform.SetParent(transform);
+        }
     }
 
     void Update()
     {
         float horizontalInput = 0f;
         float verticalInput = 0f;
+        if (!photonView.IsMine) return;
+
+if (!IsBallInHands && !IsBallFlying)
+{
+    if (ballController != null)
+    {
+        ballController.ballAudioSource.enabled = true;
+    }
+}
+
 
         if (playerNumber == 1)
         {
@@ -95,33 +113,39 @@ public class PlayerController : MonoBehaviour
         void LookAtTarget()
         {
             Vector3 directionToTarget = (Target.position - transform.position).normalized;
-            directionToTarget.y = 0; // ������� ������������ ������������, ����� ����� �� "�������" ����� ��� ����
+            directionToTarget.y = 0;
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
             rb.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.fixedDeltaTime);
         }
 
         if (IsBallInHands)
         {
-            if (Input.GetKey(KeyCode.Space) && Ball.parent == transform)
+            if (Input.GetKey(KeyCode.Space) && tempBall.transform.parent == transform)
             {
-                Ball.position = PosOverHead.position;
-                Arms.localEulerAngles = Vector3.right * 180;
+                tempBall.transform.position = PosOverHead.position;
+                                Arms.localEulerAngles = Vector3.right * 180;
                 holdTimer += Time.deltaTime;
             }
             else
             {
-                Ball.position = PosDribble.position + Vector3.up * Mathf.Abs(Mathf.Sin(Time.time * 5));
+                tempBall.transform.position = PosDribble.position + Vector3.up * Mathf.Abs(Mathf.Sin(Time.time * 5));
                 Arms.localEulerAngles = Vector3.right * 0;
             }
 
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                LookAtTarget();
-                IsBallInHands = false;
-                IsBallFlying = true;
-                Ball.parent = null;
-                T = 0;
-            }
+if (Input.GetKeyUp(KeyCode.Space))
+{
+    LookAtTarget();
+    IsBallInHands = false;
+    IsBallFlying = true;
+    tempBall.transform.parent = null;
+    tempBall.GetComponent<Rigidbody>().isKinematic = false;
+    T = 0;
+
+    float throwForce = 10f;
+    Vector3 throwDirection = (Target.position - tempBall.transform.position).normalized;
+    tempBall.GetComponent<Rigidbody>().AddForce(throwDirection * throwForce, ForceMode.Impulse);
+}
+
         }
 
         if (IsBallFlying)
@@ -148,16 +172,16 @@ public class PlayerController : MonoBehaviour
 
             Vector3 arc = Vector3.up * 5 * Mathf.Sin(t01 * 3.14f);
 
-            Ball.position = pos + arc;
+            tempBall.transform.position = pos + arc;
 
             if (t01 >= 1)
             {
                 IsBallFlying = false;
-                Ball.GetComponent<Rigidbody>().isKinematic = false;
+                tempBall.GetComponent<Rigidbody>().isKinematic = false;
                 ballController.ballAudioSource.enabled = true;
                 holdTimer = 0f;
 
-                float distanceToBall = Vector3.Distance(transform.position, Ball.position);
+                float distanceToBall = Vector3.Distance(transform.position, tempBall.transform.position);
                 if (distanceToBall < 2f)
                 {
                     IsBallInHands = false;
@@ -166,26 +190,54 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+private void OnTriggerEnter(Collider other)
+{
+    if (other.gameObject.CompareTag("Player") && other.gameObject != gameObject)
     {
-        if (other.gameObject.CompareTag("Player") && other.gameObject != gameObject)
+        if (photonView.IsMine)
         {
+            tempBall.transform.SetParent(ballParent.transform);
             PlayerController otherPlayer = other.gameObject.GetComponent<PlayerController>();
             if (otherPlayer.IsBallInHands)
             {
                 otherPlayer.IsBallInHands = false;
                 IsBallInHands = true;
-                Ball.parent = transform;
-                Ball.GetComponent<Rigidbody>().isKinematic = false;
-                ballController.ballAudioSource.enabled = true;
+
+                ballParent.transform.position = transform.position;
+                ballParent.transform.rotation = transform.rotation;
+
+                tempBall.transform.SetParent(ballParent.transform);
+                tempBall.transform.localPosition = Vector3.zero;
+                tempBall.GetComponent<Rigidbody>().isKinematic = true;
+
+                ballController = tempBall.GetComponent<BallController>();
+                if (ballController != null)
+                {
+                    ballController.ballAudioSource.enabled = false;
+                }
             }
         }
-        else if (other.gameObject.CompareTag("Ball") && !IsBallFlying)
+    }
+    else if (other.gameObject.CompareTag("Ball") && !IsBallFlying)
+    {
+        tempBall = other.gameObject;
+        tempBall.transform.SetParent(ballParent.transform);
+        IsBallInHands = true;
+
+        ballParent.transform.position = transform.position;
+        ballParent.transform.rotation = transform.rotation;
+
+        tempBall.transform.SetParent(ballParent.transform);
+        tempBall.transform.localPosition = Vector3.zero;
+        tempBall.GetComponent<Rigidbody>().isKinematic = true;
+
+        ballController = tempBall.GetComponent<BallController>();
+        if (ballController != null)
         {
-            IsBallInHands = true;
-            Ball.parent = transform;
-            Ball.GetComponent<Rigidbody>().isKinematic = false;
-            ballController.ballAudioSource.enabled = true;
+            ballController.ballAudioSource.enabled = false;
         }
     }
+}
+
+
 }

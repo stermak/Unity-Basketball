@@ -315,6 +315,8 @@
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.VisualScripting.Flow.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.VisualScripting.State.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/UnityEngine.UI.ref.dll"
+"Assets/AnimationController.cs"
+"Assets/BallAnimationController.cs"
 "Assets/BallController.cs"
 "Assets/CameraScript.cs"
 "Assets/Connection.cs"
@@ -338,6 +340,7 @@
 "Assets/PlayerController.cs"
 "Assets/Resolution.cs"
 "Assets/SceneSwitcher.cs"
+"Assets/SpawnManager.cs"
 -langversion:9.0
 
 /deterministic
