@@ -3,14 +3,14 @@ using Photon.Pun;
 
 public class SpawnManager : MonoBehaviour
 {
-    public Transform[] Spawns;
+    [SerializeField]private Transform[] Spawns;
 
-    public GameObject Player;
-    public GameObject Player2;
-    public GameObject Ball;
-    public GameObject Hoop;
-    public GameObject Hoop2;
-    public GameObject cameraPrefab;
+    [SerializeField]private GameObject Player;
+    [SerializeField]private GameObject Player2;
+    [SerializeField]private GameObject Ball;
+    [SerializeField]private GameObject Hoop;
+    [SerializeField]private GameObject Hoop2;
+    [SerializeField]private GameObject cameraPrefab;
 
     void Awake()
     {

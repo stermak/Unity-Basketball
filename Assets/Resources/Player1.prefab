@@ -872,6 +872,9 @@ MonoBehaviour:
   PosOverHead: {fileID: 3437998792826142455}
   Arms: {fileID: 2618124829082790104}
   Target: {fileID: 385277259599264746, guid: 55ac84ca350de1441ae53ee74b14cdd2, type: 3}
+  rb: {fileID: 0}
+  ballParent: {fileID: 0}
+  tempBall: {fileID: 0}
 --- !u!114 &2075195699251875092
 MonoBehaviour:
   m_ObjectHideFlags: 0

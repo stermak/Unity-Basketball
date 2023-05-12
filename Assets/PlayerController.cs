@@ -21,9 +21,10 @@ public class PlayerController : MonoBehaviour
     public Transform Target;
 
     private PhotonView photonView;
-    private Rigidbody rb;
-    private GameObject ballParent;
-    private GameObject tempBall;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private GameObject ballParent;
+    [HideInInspector] public GameObject tempBall;
+
     private bool IsBallFlying = false;
     private float T = 0;
     private float holdTimer = 0f;
@@ -35,16 +36,30 @@ public class PlayerController : MonoBehaviour
         return new Vector3(x, position.y, z);
     }
 
-    void Start()
+void Start()
+{
+    rb = GetComponent<Rigidbody>();
+    photonView = GetComponent<PhotonView>();
+    if (photonView.IsMine)
     {
-        rb = GetComponent<Rigidbody>();
-        photonView = GetComponent<PhotonView>();
-        if (photonView.IsMine)
+        ballParent = new GameObject("BallParent");
+        ballParent.transform.SetParent(transform);
+
+        // Assign tempBall to the BallPrefab when created
+        GameObject newBall = Instantiate(BallPrefab);
+        tempBall = newBall;
+        tempBall.transform.SetParent(ballParent.transform);
+        tempBall.transform.localPosition = Vector3.zero;
+        tempBall.GetComponent<Rigidbody>().isKinematic = true;
+
+        ballController = tempBall.GetComponent<BallController>();
+        if (ballController != null)
         {
-            ballParent = new GameObject("BallParent");
-            ballParent.transform.SetParent(transform);
+            ballController.ballAudioSource.enabled = false;
         }
     }
+}
+
 
     void Update()
     {
