@@ -17,8 +17,18 @@ Library\Bee\artifacts\mvdfrm\Unity.VisualScripting.Shared.Editor.ref.dll_9669F6E
 Library\Bee\artifacts\mvdfrm\Unity.VisualScripting.State.Editor.ref.dll_E03858E727F23F6F.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.VisualScripting.State.ref.dll_D91762B7076BE462.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.VisualStudio.Editor.ref.dll_3A975DBA53ABA4AD.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.XR.Management.Editor.ref.dll_7BA8CC5454F13E52.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.XR.Management.ref.dll_404BC0C35449934F.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.XR.Oculus.Editor.ref.dll_EC6E1675CFAEEAAC.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.XR.Oculus.ref.dll_431DEB9238966955.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.XR.OpenVR.Editor.ref.dll_AF86156B4C682A4F.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.XR.OpenVR.ref.dll_B03AB47A8CDCCB82.mvfrm
+Library\Bee\artifacts\mvdfrm\UnityEditor.SpatialTracking.ref.dll_8911EA67839E93F0.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEditor.UI.ref.dll_4C98D3F7040CD4F5.mvfrm
+Library\Bee\artifacts\mvdfrm\UnityEditor.XR.LegacyInputHelpers.ref.dll_3F12D550ED6E7C7D.mvfrm
+Library\Bee\artifacts\mvdfrm\UnityEngine.SpatialTracking.ref.dll_1552DC8EFC971715.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEngine.UI.ref.dll_08FEAA520A2EFD60.mvfrm
+Library\Bee\artifacts\mvdfrm\UnityEngine.XR.LegacyInputHelpers.ref.dll_FFA26A0728B3CF82.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.VisualScripting.Antlr3.Runtime.dll_89E1C3EA9E22F837.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEditor.CoreModule.dll_239C8A4232D51903.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEditor.DeviceSimulatorModule.dll_9F9EEF8CD286792E.mvfrm
@@ -102,3 +112,5 @@ Library\Bee\artifacts\mvdfrm\UnityEngine.VirtualTexturingModule.dll_3467D979D915
 Library\Bee\artifacts\mvdfrm\UnityEngine.VRModule.dll_9E7233994DE0F01B.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEngine.WindModule.dll_BD0C38BD6C110297.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEngine.XRModule.dll_D130F69DD71B3D79.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.Android.Gradle.dll_F54653215D46E46B.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.Android.Types.dll_3F6B0E080DBAC501.mvfrm

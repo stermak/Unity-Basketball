@@ -377,10 +377,18 @@
 -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.VisualScripting.State.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.VisualScripting.State.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.VisualStudio.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1300b0aE.dag/Unity.XR.Management.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1300b0aE.dag/Unity.XR.Management.ref.dll"
+-r:"Library/Bee/artifacts/1300b0aE.dag/Unity.XR.Oculus.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1300b0aE.dag/Unity.XR.Oculus.ref.dll"
+-r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.SpatialTracking.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.UI.ref.dll"
+-r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.XR.LegacyInputHelpers.ref.dll"
+-r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.SpatialTracking.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.UI.ref.dll"
+-r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.XR.LegacyInputHelpers.ref.dll"
 "Assets/Photon/PhotonChat/Demos/DemoChat/Editor/ChatEditor.cs"
 -langversion:9.0
 
