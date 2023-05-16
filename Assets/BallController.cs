@@ -5,11 +5,16 @@ public class BallController : MonoBehaviour
 {
     public AudioSource ballAudioSource;
     public AudioClip bounceSound;
+    private float RandomNumber = 7;
 
 
     void Start()
     {
         ballAudioSource = GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
     }
 
     void OnCollisionEnter(Collision collision)
